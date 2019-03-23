@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp"
+    tools:context=".LoginActivity">
+
+    <TextView
+        android:id="@+id/loggedin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logged in as: "
+        android:textSize="15dp"/>
+
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:textSize="15dp"
+        android:layout_toRightOf="@+id/loggedin" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:textSize="15dp"
+        android:layout_below="@+id/loggedin"/>
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_below="@+id/name"
+        android:layout_marginTop="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:src="@drawable/phishx" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_below="@+id/logo"
+        android:layout_marginTop="15dp"
+        android:text="These credentials will be used only by phishX, to save you from entering your legitimate credentials in phishing URLs"
+        android:textColor="@color/colorBlack"
+        android:textSize="17sp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/description1"
+        android:layout_below="@+id/description"
+        android:layout_marginTop="15dp"
+        android:text="Ensure, you only enter your Fake Credentials"
+        android:textColor="@color/colorBlack"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:gravity="left"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/layoutemail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/description1"
+        android:layout_marginTop="20dp">
+        <EditText
+            android:id="@+id/f_email"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/colorText"
+            android:hint="Fake UserID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="InvalidId"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/layoutpassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layoutemail"
+        android:layout_marginTop="5dp"
+        app:passwordToggleEnabled="true">
+        <EditText
+            android:id="@+id/f_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Fake Password"
+            android:inputType="textPassword"
+            android:textColor="@color/colorText"
+            tools:ignore="InvalidId" />
+    </android.support.design.widget.TextInputLayout>
+
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_below="@id/layoutpassword"
+        android:layout_marginTop="35dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_below="@+id/layoutpassword"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="Submit Credentials"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/text1"
+        android:layout_marginBottom="30dp"
+        android:layout_alignParentBottom="true"
+        android:text="All your information is private and secured using 128 bit hashfunction"
+        android:textColor="@color/colorBlack"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+</RelativeLayout>
