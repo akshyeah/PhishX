@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -20,6 +21,8 @@ public class WebView extends AppCompatActivity implements View.OnClickListener {
      * A default URL to open if the URL is empty.
      */
     private static final String DEFAULT_URL = "http://www.google.com";
+    private static final String MODE_HTTP = "http://";
+    private static final String MODE_HTTPS = "https://";
     /**
      * The URL for performing a google search
      */
@@ -71,7 +74,7 @@ public class WebView extends AppCompatActivity implements View.OnClickListener {
      * A method to handle initialisation of the WebView and its settings.
      */
     @SuppressLint("SetJavaScriptEnabled")
-    private void initWebView(){
+    private void initWebView() {
         webView = findViewById(R.id.webview);
         webView.setWebViewClient(new WebViewClient());
         webView.getSettings().setJavaScriptEnabled(true);
@@ -112,12 +115,16 @@ public class WebView extends AppCompatActivity implements View.OnClickListener {
      * @param url a URL or the search string.
      */
     private void openWebsite(@Nullable final String url) {
+        Log.d("WebView", "Opening URL: " + url);
         if (TextUtils.isEmpty(url)) {
             webView.loadUrl(DEFAULT_URL);
         } else {
-            if (Patterns.WEB_URL.matcher(url).matches())
-                webView.loadUrl(url);
-            else
+            if (Patterns.WEB_URL.matcher(url).matches()) {
+                if (url.startsWith(MODE_HTTP) || url.startsWith(MODE_HTTPS))
+                    webView.loadUrl(url);
+                else
+                    webView.loadUrl(MODE_HTTP + url);
+            } else
                 webView.loadUrl(GOOGLE_SEARCH + url.trim());
         }
     }
