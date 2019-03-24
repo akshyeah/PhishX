@@ -14,7 +14,7 @@ public class HomeActivity extends AppCompatActivity {
     private TextView email, name, link_fake;
     private Button btn_logout;
 
-    SessionManager sessionManager;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +30,8 @@ public class HomeActivity extends AppCompatActivity {
         btn_logout = findViewById(R.id.btn_logout);
 
         HashMap<String, String> user = sessionManager.getUserDetail();
-        String mName = user.get(sessionManager.NAME);
-        String mEmail = user.get(sessionManager.EMAIL);
+        String mName = user.get(SessionManager.NAME);
+        String mEmail = user.get(SessionManager.EMAIL);
 
         name.setText(mName);
         email.setText(mEmail);
