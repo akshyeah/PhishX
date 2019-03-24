@@ -25,7 +25,9 @@
             android:name=".LoginActivity"
             android:theme="@style/AppTheme" />
         <activity android:name=".FakeLoginActivity" />
-        <activity android:name=".WebView">
+        <activity android:name=".WebView"
+                  android:enabled="true"
+                  android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
