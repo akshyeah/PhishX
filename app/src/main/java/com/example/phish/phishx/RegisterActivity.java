@@ -1,6 +1,7 @@
 package com.example.phish.phishx;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +18,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,11 +36,15 @@ public class RegisterActivity extends AppCompatActivity {
     private ProgressBar loading;
     private TextView link_login;
     private static String URL_REGIST="http://192.168.43.209:10080/htdocs/android_register_login/register.php";
-
+    //Firebase object declared
+    private FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+    //Creating FireBase Instance onCreate
+        firebaseAuth=FirebaseAuth.getInstance();
 
         loading = findViewById(R.id.loading);
         name = findViewById(R.id.name);
@@ -82,12 +91,26 @@ public class RegisterActivity extends AppCompatActivity {
         final String email = this.email.getText().toString().trim();
         final String password = this.password.getText().toString().trim();
 
+        firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful())
+                {
+                    Toast.makeText(RegisterActivity.this,"Registered Succesfully",Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(RegisterActivity.this,"Could not Register",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REGIST,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try{
                             JSONObject jsonObject = new JSONObject(response);
+
                             String success = jsonObject.getString("success");
 
                             if(success.equals("1")){
