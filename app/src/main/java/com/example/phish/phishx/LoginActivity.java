@@ -41,15 +41,13 @@ public class LoginActivity extends AppCompatActivity {
     SessionManager sessionManager;
 
     //Firebase Object Declaration
-    FirebaseAuth firebaseAuth;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //firebase object initialization;
-        firebaseAuth=FirebaseAuth.getInstance();
 
        /*if(firebaseAuth.getCurrentUser()!=null)
         {
@@ -61,6 +59,9 @@ public class LoginActivity extends AppCompatActivity {
         }*/
 
         sessionManager = new SessionManager(this);
+        //firebase object initialization;
+        firebaseAuth=FirebaseAuth.getInstance();
+
 
         loading = findViewById(R.id.loading);
         email = findViewById(R.id.email);
@@ -104,10 +105,10 @@ public class LoginActivity extends AppCompatActivity {
                 {
                    // Toast.makeText(LoginActivity.this, "Logging in as "+email, Toast.LENGTH_SHORT).show();
 
-                    Intent intent ;
-                    startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-                    finish();
                     Toast.makeText(LoginActivity.this,"Login Successful",Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                   // finish();
+
 
                 }
                 else

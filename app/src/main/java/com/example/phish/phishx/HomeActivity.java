@@ -18,16 +18,19 @@ public class HomeActivity extends AppCompatActivity {
     private Button btn_logout;
 
     private SessionManager sessionManager;
-  //  private   FirebaseAuth firebaseAuth ;
+    private   FirebaseAuth firebaseAuth ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-       // firebaseAuth=FirebaseAuth.getInstance();
-       // FirebaseUser user=firebaseAuth.getCurrentUser();
+        btn_logout=findViewById(R.id.btn_logout);
+        firebaseAuth=FirebaseAuth.getInstance();
+        FirebaseUser fuser=firebaseAuth.getCurrentUser();
+        email=(TextView)findViewById(R.id.email);
+        email.setText(fuser.getEmail());
 
-        sessionManager = new SessionManager(this);
+        /*sessionManager = new SessionManager(this);
         sessionManager.checkLogin();
 
         name = findViewById(R.id.name);
@@ -47,12 +50,13 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View view) {
                     startActivity(new Intent(HomeActivity.this, FakeLoginActivity.class));
             }
-        });
+        });*/
 
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sessionManager.loggout();
+               // sessionManager.loggout();
+                startActivity(new Intent(getApplicationContext(),LoginActivity.class));
             }
         });
     }
