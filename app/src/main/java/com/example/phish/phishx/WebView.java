@@ -1,6 +1,8 @@
 package com.example.phish.phishx;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +16,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import java.net.URL;
 
 public class WebView extends AppCompatActivity implements View.OnClickListener {
 
@@ -103,10 +107,27 @@ public class WebView extends AppCompatActivity implements View.OnClickListener {
      */
     @Nullable
     private String getURLPassedToActivity() {
-        if (getIntent() == null || getIntent().getData() == null)
+
+        Intent intent = getIntent();
+
+        Uri data = intent.getData();
+        URL url = null;
+
+        try {
+            url = new URL(data.getScheme(),
+                    data.getHost(),
+                    data.getPath());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+       /* if (getIntent() == null || getIntent().getData() == null)
             return null;
 
-        return getIntent().getData().toString();
+        return getIntent().getData().toString();*/
+       if(url==null)
+           return null;
+       else
+           return url.toString();
     }
 
     /**
@@ -115,6 +136,12 @@ public class WebView extends AppCompatActivity implements View.OnClickListener {
      * @param url a URL or the search string.
      */
     private void openWebsite(@Nullable final String url) {
+
+        Intent intent = new Intent(Intent.ACTION_VIEW,
+                Uri.parse(url));
+
+        startActivity(intent);
+
         Log.d("WebView", "Opening URL: " + url);
         if (TextUtils.isEmpty(url)) {
             webView.loadUrl(DEFAULT_URL);

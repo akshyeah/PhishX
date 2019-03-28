@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.HashMap;
 
 public class HomeActivity extends AppCompatActivity {
@@ -15,11 +18,14 @@ public class HomeActivity extends AppCompatActivity {
     private Button btn_logout;
 
     private SessionManager sessionManager;
+  //  private   FirebaseAuth firebaseAuth ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+       // firebaseAuth=FirebaseAuth.getInstance();
+       // FirebaseUser user=firebaseAuth.getCurrentUser();
 
         sessionManager = new SessionManager(this);
         sessionManager.checkLogin();

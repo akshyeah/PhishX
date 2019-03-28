@@ -1,6 +1,8 @@
 package com.example.phish.phishx;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +19,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,10 +40,25 @@ public class LoginActivity extends AppCompatActivity {
     private static String URL_LOGIN = "http://192.168.43.209:10080/htdocs/android_register_login/login.php";
     SessionManager sessionManager;
 
+    //Firebase Object Declaration
+    FirebaseAuth firebaseAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //firebase object initialization;
+        firebaseAuth=FirebaseAuth.getInstance();
+
+       /*if(firebaseAuth.getCurrentUser()!=null)
+        {
+            finish();
+            Intent intent ;
+            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+
+
+        }*/
 
         sessionManager = new SessionManager(this);
 
@@ -76,7 +97,27 @@ public class LoginActivity extends AppCompatActivity {
         loading.setVisibility(View.VISIBLE);
         btn_login.setVisibility(View.GONE);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_LOGIN,
+       firebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful())
+                {
+                   // Toast.makeText(LoginActivity.this, "Logging in as "+email, Toast.LENGTH_SHORT).show();
+
+                    Intent intent ;
+                    startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                    finish();
+                    Toast.makeText(LoginActivity.this,"Login Successful",Toast.LENGTH_SHORT).show();
+
+                }
+                else
+                {
+                    Toast.makeText(LoginActivity.this,"Login Failed",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        /*StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_LOGIN,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -137,6 +178,6 @@ public class LoginActivity extends AppCompatActivity {
         };
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
+        requestQueue.add(stringRequest);*/
     }
 }

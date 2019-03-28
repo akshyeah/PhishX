@@ -25,7 +25,8 @@
             android:name=".LoginActivity"
             android:theme="@style/AppTheme" />
         <activity android:name=".FakeLoginActivity" />
-        <activity android:name=".WebView"
+
+      <!--  <activity android:name=".WebView"
                   android:enabled="true"
                   android:exported="true">
             <intent-filter>
@@ -38,6 +39,30 @@
                 <data android:scheme="https" />
                 <data android:mimeType="text/html" />
             </intent-filter>
+        </activity>-->
+        <activity
+            android:name=".WebView"
+             >
+            <intent-filter>
+
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.APP_BROWSER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:scheme="about" />
+                <data android:scheme="javascript" />
+            </intent-filter>
+
         </activity>
     </application>
 
