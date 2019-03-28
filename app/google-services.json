@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "870595334232",
+    "firebase_url": "https://phishx.firebaseio.com",
+    "project_id": "phishx",
+    "storage_bucket": "phishx.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:870595334232:android:1b036bc43775bda9",
+        "android_client_info": {
+          "package_name": "com.example.phish.phishx"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "870595334232-eeq4do7hlt1u3d19cm6elc09dosorcal.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAywHwaBhQyJdRFc2u51zK5vnED4dlKBaE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
