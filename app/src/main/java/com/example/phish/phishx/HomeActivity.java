@@ -28,7 +28,10 @@ public class HomeActivity extends AppCompatActivity {
         firebaseAuth=FirebaseAuth.getInstance();
         FirebaseUser fuser=firebaseAuth.getCurrentUser();
         email=(TextView)findViewById(R.id.email);
-        email.setText(fuser.getEmail());
+        try {
+            email.setText(fuser.getEmail());
+        }
+        catch (Exception e){}
 
         /*sessionManager = new SessionManager(this);
         sessionManager.checkLogin();
