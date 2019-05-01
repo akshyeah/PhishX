@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Email"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:layout_toRightOf="@+id/loggedin" />
 
     <ImageView
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/logo"
         android:text="Welcome!"
-        android:textSize="25dp"/>
+        android:textSize="25sp"/>
 
     <TextView
         android:id="@+id/name"
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:text="Name"
         android:textColor="@android:color/black"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:layout_toRightOf="@+id/welcome"
         android:layout_below="@+id/logo"
         android:layout_marginLeft="5dp"/>
@@ -63,29 +63,64 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/desc"
         android:textSize="20sp"
-        android:layout_marginTop="5dp"
-        android:text="Please provide your fake credencials to make PhishX work best for you!"/>
+        android:text="Please click on Generate to get the fake credencials to make PhishX work best for you!"/>
 
-    <TextView
-        android:id="@+id/link_fake"
-        android:layout_below="@+id/desc1"
-        android:text="Click here! to submit fake credentials"
-        android:textColor="@color/colorBlack"
-        android:textSize="17sp"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
 
     <Button
-        android:id="@+id/btn_logout"
-        android:layout_width="match_parent"
+        android:id="@+id/btn_generate"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Logout"
-        android:backgroundTint="@color/colorPrimary"
-        android:textColor="@android:color/white"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"/>
+        android:layout_centerHorizontal="true"
+        android:text="Generate"
+        android:layout_below="@+id/desc1"
+        android:textSize="17sp"
+        android:backgroundTint="@color/colorGrey"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/emailFake"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_generate"
+        android:text="Fake Email: "
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorRichBlack"
+        android:layout_marginTop="20dp"/>
+    <TextView
+        android:id="@+id/fake_email"
+        android:layout_below="@+id/btn_generate"
+        android:layout_toRightOf="@+id/emailFake"
+        android:text="Fake Email"
+        android:textColor="@color/colorHoneyPot"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="7dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/passwordFake"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/emailFake"
+        android:text="Fake Password: "
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorRichBlack"
+        android:layout_marginTop="10dp"/>
+    <TextView
+        android:id="@+id/fake_password"
+        android:layout_below="@+id/fake_email"
+        android:layout_toRightOf="@+id/passwordFake"
+        android:text="Fake Pasword"
+        android:textColor="@color/colorHoneyPot"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="7dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 </RelativeLayout>

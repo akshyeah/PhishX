@@ -48,6 +48,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        getSupportActionBar().setTitle("PhishX | Login");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
        /*if(firebaseAuth.getCurrentUser()!=null)
         {
@@ -103,17 +106,18 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful())
                 {
-                   // Toast.makeText(LoginActivity.this, "Logging in as "+email, Toast.LENGTH_SHORT).show();
-
                     Toast.makeText(LoginActivity.this,"Login Successful",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Logging in as "+email, Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-                   // finish();
+                    finish();
 
 
                 }
                 else
                 {
                     Toast.makeText(LoginActivity.this,"Login Failed",Toast.LENGTH_SHORT).show();
+                    loading.setVisibility(View.GONE);
+                    btn_login.setVisibility(View.VISIBLE);
                 }
             }
         });

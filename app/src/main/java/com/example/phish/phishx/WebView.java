@@ -120,7 +120,7 @@ public class WebView extends AppCompatActivity implements View.OnClickListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
-       /* if (getIntent() == null || getIntent().getData() == null)
+       /*if (getIntent() == null || getIntent().getData() == null)
             return null;
 
         return getIntent().getData().toString();*/
@@ -137,10 +137,9 @@ public class WebView extends AppCompatActivity implements View.OnClickListener {
      */
     private void openWebsite(@Nullable final String url) {
 
-        Intent intent = new Intent(Intent.ACTION_VIEW,
-                Uri.parse(url));
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 
-        startActivity(intent);
+        //startActivity(intent);
 
         Log.d("WebView", "Opening URL: " + url);
         if (TextUtils.isEmpty(url)) {

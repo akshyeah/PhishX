@@ -11,41 +11,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity
+            android:name=".HomeActivity"
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".RegisterActivity"
+            android:parentActivityName=".LoginActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme">
+        </activity>
         <activity android:name=".FakeLoginActivity" />
-
-      <!--  <activity android:name=".WebView"
-                  android:enabled="true"
-                  android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.BROWSABLE" />
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data android:scheme="http" />
-                <data android:scheme="https" />
-                <data android:mimeType="text/html" />
-            </intent-filter>
-        </activity>-->
         <activity
-            android:name=".WebView"
-             >
+            android:name=".AboutActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity android:name=".WebView">
             <intent-filter>
-
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.BROWSABLE" />
@@ -62,8 +44,18 @@
                 <data android:scheme="about" />
                 <data android:scheme="javascript" />
             </intent-filter>
-
         </activity>
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
     </application>
 
 </manifest>

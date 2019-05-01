@@ -24,7 +24,7 @@
         android:layout_marginTop="30dp">
         <EditText
             android:inputType="textEmailAddress"
-            android:textColor="@color/colorText"
+            android:textColor="@color/colorRichBlack"
             android:hint="Email"
             android:id="@+id/email"
             android:layout_width="match_parent"
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:hint="Password"
             android:inputType="textPassword"
-            android:textColor="@color/colorText"
+            android:textColor="@color/colorRichBlack"
             tools:ignore="InvalidId" />
     </android.support.design.widget.TextInputLayout>
     
@@ -64,7 +64,7 @@
         android:layout_height="55dp"
         android:layout_below="@+id/layoutpassword"
         android:layout_marginTop="20dp"
-        android:backgroundTint="@color/colorPrimary"
+        android:backgroundTint="@color/colorGrey"
         android:text="Login"
         android:textColor="@android:color/white" />
 
