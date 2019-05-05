@@ -80,8 +80,24 @@ public class WebView extends AppCompatActivity implements View.OnClickListener {
     @SuppressLint("SetJavaScriptEnabled")
     private void initWebView() {
         webView = findViewById(R.id.webview);
-        webView.setWebViewClient(new WebViewClient());
+        //webView.setWebViewClient(new WebViewClient());
         webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setDomStorageEnabled(true);
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(android.webkit.WebView view, String url) {
+                super.onPageFinished(view, url);
+                String username = "qwertyui";
+                String email = "asdfghjkqw@gmail.com";
+                String pass = "asdfghjklqwer";
+                String js = "javascript:( function() { "+
+                        "document.getElementById('username').value = '"+username+"'; "+
+                        "document.getElementById('email').value = '"+email+"'; "+
+                        "document.getElementById('password').value = '"+pass+"';"+
+                        "document.getElementById('send').click(); })();";
+                webView.loadUrl(js);
+            }
+        });
         webView.setWebChromeClient(new WebChromeClient() {
 
             @Override
@@ -95,8 +111,9 @@ public class WebView extends AppCompatActivity implements View.OnClickListener {
                 super.onReceivedTitle(view, title);
                 if (getSupportActionBar() == null)
                     return;
-                getSupportActionBar().setTitle(title);
+                getSupportActionBar().setTitle("PhishX | "+title);
             }
+
         });
     }
 
@@ -130,11 +147,13 @@ public class WebView extends AppCompatActivity implements View.OnClickListener {
            return url.toString();
     }
 
+
     /**
      * This method handles the logic of loading the website.
      * If the url is a string then It loads the google search and If it is a valid URL then loads it.
      * @param url a URL or the search string.
      */
+
     private void openWebsite(@Nullable final String url) {
 
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
@@ -144,7 +163,8 @@ public class WebView extends AppCompatActivity implements View.OnClickListener {
         Log.d("WebView", "Opening URL: " + url);
         if (TextUtils.isEmpty(url)) {
             webView.loadUrl(DEFAULT_URL);
-        } else {
+        }
+        else {
             if (Patterns.WEB_URL.matcher(url).matches()) {
                 if (url.startsWith(MODE_HTTP) || url.startsWith(MODE_HTTPS))
                     webView.loadUrl(url);
@@ -153,5 +173,8 @@ public class WebView extends AppCompatActivity implements View.OnClickListener {
             } else
                 webView.loadUrl(GOOGLE_SEARCH + url.trim());
         }
+
     }
+
+
 }

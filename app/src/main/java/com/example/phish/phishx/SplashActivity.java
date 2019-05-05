@@ -31,7 +31,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run()
             {
                 try{
-                    sleep(6000);
+                    sleep(5000);
                 }
                 catch (InterruptedException e)
                 {
