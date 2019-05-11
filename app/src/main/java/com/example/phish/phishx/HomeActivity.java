@@ -18,8 +18,11 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.HashMap;
 import java.util.Random;
 
+import static android.provider.AlarmClock.EXTRA_MESSAGE;
+
 public class HomeActivity extends AppCompatActivity {
 
+    public static final String EXTRA_MESSAGE = "";
     private TextView email,fake_email, fake_password,name, link_fake;
     private Button btn_generate;
 
@@ -122,6 +125,14 @@ public class HomeActivity extends AppCompatActivity {
 
             case R.id.btn_about : startActivity(new Intent(HomeActivity.this, AboutActivity.class));
                 return true;
+
+            case R.id.btn_browser :
+                String url = "https://www.google.com";
+                Intent intent = new Intent(this, WebView.class);
+                intent.putExtra(EXTRA_MESSAGE, url);
+                startActivity(intent);
+                return true;
+
             default: return super.onOptionsItemSelected(item);
         }
     }

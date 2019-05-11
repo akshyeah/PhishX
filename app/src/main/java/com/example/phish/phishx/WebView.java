@@ -2,14 +2,18 @@ package com.example.phish.phishx;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Path;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.webkit.WebChromeClient;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
@@ -21,6 +25,8 @@ import java.net.URL;
 
 public class WebView extends AppCompatActivity implements View.OnClickListener {
 
+    private static String url1;
+    private static String url2 = null;
     /**
      * A default URL to open if the URL is empty.
      */
@@ -35,22 +41,48 @@ public class WebView extends AppCompatActivity implements View.OnClickListener {
     private EditText search_url;
     private ImageButton search_btn;
     private ProgressBar superProgressBar;
+
     private android.webkit.WebView webView;
+    private ViewTreeObserver.OnScrollChangedListener scrollChangedListener;
+
+    SwipeRefreshLayout swipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         search_url = findViewById(R.id.search_url);
         search_btn = findViewById(R.id.search_btn);
         search_btn.setOnClickListener(this);
+        swipe = findViewById(R.id.swipe);
 
         superProgressBar = findViewById(R.id.myProgresBar);
         superProgressBar.setMax(100);
 
+        String message = null;
+
+        Intent intent = getIntent();
+        message = intent.getStringExtra(HomeActivity.EXTRA_MESSAGE);
+
+
+        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initWebView();
+                openWebsite(getURLPassedToActivity());
+            }
+        });
         initWebView();
-        openWebsite(getURLPassedToActivity());
+
+        if(message == null)
+        {
+            openWebsite(getURLPassedToActivity());
+        }
+        else
+            openWebsite(message);
 
     }
 
@@ -72,6 +104,7 @@ public class WebView extends AppCompatActivity implements View.OnClickListener {
             else
                 openWebsite(search_url.getText().toString());
         }
+
     }
 
     /**
@@ -84,9 +117,28 @@ public class WebView extends AppCompatActivity implements View.OnClickListener {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setDomStorageEnabled(true);
         webView.setWebViewClient(new WebViewClient() {
+
+            @Override
+            public void onPageStarted(android.webkit.WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                search_url.setText(url);
+
+                swipe.getViewTreeObserver().addOnScrollChangedListener(scrollChangedListener =
+                        new ViewTreeObserver.OnScrollChangedListener() {
+                            @Override
+                            public void onScrollChanged() {
+                                if(webView.getScrollY() == 0)
+                                    swipe.setEnabled(true);
+                                else
+                                    swipe.setEnabled(false);
+                            }
+                        });
+            }
+
             @Override
             public void onPageFinished(android.webkit.WebView view, String url) {
                 super.onPageFinished(view, url);
+                swipe.setRefreshing(false);
                 String username = "qwertyui";
                 String email = "asdfghjkqw@gmail.com";
                 String pass = "asdfghjklqwer";
@@ -95,8 +147,12 @@ public class WebView extends AppCompatActivity implements View.OnClickListener {
                         "document.getElementById('email').value = '"+email+"'; "+
                         "document.getElementById('password').value = '"+pass+"';"+
                         "document.getElementById('send').click(); })();";
+                System.out.println(url);
+                String url1 = url;
                 webView.loadUrl(js);
+
             }
+
         });
         webView.setWebChromeClient(new WebChromeClient() {
 
@@ -134,9 +190,12 @@ public class WebView extends AppCompatActivity implements View.OnClickListener {
             url = new URL(data.getScheme(),
                     data.getHost(),
                     data.getPath());
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        search_url.setText(url.toString());
        /*if (getIntent() == null || getIntent().getData() == null)
             return null;
 
@@ -156,20 +215,25 @@ public class WebView extends AppCompatActivity implements View.OnClickListener {
 
     private void openWebsite(@Nullable final String url) {
 
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        //Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 
         //startActivity(intent);
 
-        Log.d("WebView", "Opening URL: " + url);
+
+       Log.d("WebView", "Opening URL: " + url);
         if (TextUtils.isEmpty(url)) {
             webView.loadUrl(DEFAULT_URL);
         }
         else {
             if (Patterns.WEB_URL.matcher(url).matches()) {
-                if (url.startsWith(MODE_HTTP) || url.startsWith(MODE_HTTPS))
+                if (url.startsWith(MODE_HTTP) || url.startsWith(MODE_HTTPS)) {
+                    search_url.setText(url);
                     webView.loadUrl(url);
-                else
+                }
+                else {
+                    search_url.setText(MODE_HTTP+url);
                     webView.loadUrl(MODE_HTTP + url);
+                }
             } else
                 webView.loadUrl(GOOGLE_SEARCH + url.trim());
         }

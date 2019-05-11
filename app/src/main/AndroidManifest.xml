@@ -26,7 +26,8 @@
         <activity
             android:name=".AboutActivity"
             android:parentActivityName=".HomeActivity" />
-        <activity android:name=".WebView">
+        <activity android:name=".WebView"
+            android:parentActivityName=".HomeActivity">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />

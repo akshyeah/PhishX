@@ -46,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("PhishX | Register");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-    //Creating FireBase Instance onCreate
+        //Creating FireBase Instance onCreate
         firebaseAuth=FirebaseAuth.getInstance();
 
         loading = findViewById(R.id.loading);
