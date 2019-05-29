@@ -41,7 +41,7 @@ public class HomeActivity extends AppCompatActivity {
 
         firebaseAuth=FirebaseAuth.getInstance();
         FirebaseUser fuser=firebaseAuth.getCurrentUser();
-        email=(TextView)findViewById(R.id.email);
+        email= findViewById(R.id.email);
        try {
            email.setText(fuser.getEmail());
        }catch(Exception e)

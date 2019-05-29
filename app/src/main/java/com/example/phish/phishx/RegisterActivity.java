@@ -35,7 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Button btn_regist;
     private ProgressBar loading;
     private TextView link_login;
-    private static String URL_REGIST="http://192.168.43.209:10080/htdocs/android_register_login/register.php";
+    //private static String URL_REGIST="http://192.168.43.209:10080/htdocs/android_register_login/register.php";
     //Firebase object declared
     private FirebaseAuth firebaseAuth;
     @Override
@@ -107,7 +107,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REGIST,
+        /*StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REGIST,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -149,6 +149,6 @@ public class RegisterActivity extends AppCompatActivity {
         };
 
         RequestQueue requestQueue = Volley.newRequestQueue( this);
-        requestQueue.add(stringRequest);
+        requestQueue.add(stringRequest);*/
     }
 }

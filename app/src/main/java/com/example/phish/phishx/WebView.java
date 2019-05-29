@@ -1,5 +1,4 @@
 package com.example.phish.phishx;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -20,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
 
 import java.net.URL;
 
@@ -72,14 +72,25 @@ public class WebView extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void onRefresh() {
                 initWebView();
-                openWebsite(getURLPassedToActivity());
+
+                try {
+
+                    openWebsite(getURLPassedToActivity());
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
             }
         });
         initWebView();
 
         if(message == null)
         {
-            openWebsite(getURLPassedToActivity());
+
+                    openWebsite(getURLPassedToActivity());
+
         }
         else
             openWebsite(message);
@@ -139,7 +150,7 @@ public class WebView extends AppCompatActivity implements View.OnClickListener {
             public void onPageFinished(android.webkit.WebView view, String url) {
                 super.onPageFinished(view, url);
                 swipe.setRefreshing(false);
-                String username = "qwertyui";
+                /*String username = "qwertyui";
                 String email = "asdfghjkqw@gmail.com";
                 String pass = "asdfghjklqwer";
                 String js = "javascript:( function() { "+
@@ -149,7 +160,7 @@ public class WebView extends AppCompatActivity implements View.OnClickListener {
                         "document.getElementById('send').click(); })();";
                 System.out.println(url);
                 String url1 = url;
-                webView.loadUrl(js);
+                webView.loadUrl(js);*/
 
             }
 
@@ -218,25 +229,32 @@ public class WebView extends AppCompatActivity implements View.OnClickListener {
         //Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 
         //startActivity(intent);
+        String url1="https://checkurl.phishtank.com/checkurl/index.php?url="+url+"&format=json";
+        try {
+            System.out.println(HTTPConnection.getconnection(url1));
+        }
+        catch (Exception e){
 
+        }
 
-       Log.d("WebView", "Opening URL: " + url);
-        if (TextUtils.isEmpty(url)) {
+       Log.d("WebView", "Opening URL: " + url1);
+        if (TextUtils.isEmpty(url1)) {
             webView.loadUrl(DEFAULT_URL);
         }
         else {
-            if (Patterns.WEB_URL.matcher(url).matches()) {
-                if (url.startsWith(MODE_HTTP) || url.startsWith(MODE_HTTPS)) {
-                    search_url.setText(url);
-                    webView.loadUrl(url);
+            if (Patterns.WEB_URL.matcher(url1).matches()) {
+                if (url1.startsWith(MODE_HTTP) || url1.startsWith(MODE_HTTPS)) {
+                    search_url.setText(url1);
+                    webView.loadUrl(url1);
                 }
                 else {
-                    search_url.setText(MODE_HTTP+url);
-                    webView.loadUrl(MODE_HTTP + url);
+                    search_url.setText(MODE_HTTP+url1);
+                    webView.loadUrl(MODE_HTTP + url1);
                 }
             } else
-                webView.loadUrl(GOOGLE_SEARCH + url.trim());
+                webView.loadUrl(GOOGLE_SEARCH + url1.trim());
         }
+
 
     }
 
