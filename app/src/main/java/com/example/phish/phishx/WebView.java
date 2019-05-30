@@ -21,6 +21,12 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 public class WebView extends AppCompatActivity implements View.OnClickListener {
@@ -229,13 +235,8 @@ public class WebView extends AppCompatActivity implements View.OnClickListener {
         //Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 
         //startActivity(intent);
-        String url1="https://checkurl.phishtank.com/checkurl/index.php?url="+url+"&format=json";
-        try {
-            System.out.println(HTTPConnection.getconnection(url1));
-        }
-        catch (Exception e){
+        String url1="https://checkurl.phishtank.com/checkurl/index.php?url="+url+"&format=json&api_key=88b7197aa0e0143c750de1a8e5b5ccc86badba3130e80f9dc52df6df65216e82";
 
-        }
 
        Log.d("WebView", "Opening URL: " + url1);
         if (TextUtils.isEmpty(url1)) {
